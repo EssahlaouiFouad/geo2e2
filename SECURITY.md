@@ -72,6 +72,8 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains   [uniquement si 
 
 **Important** : ces fichiers décrivent la configuration souhaitée. Sur l'hébergement actuel, seul le serveur d'origine décide des en-têtes réellement renvoyés ; la vérification doit être faite avec `curl -I` sur l'URL publique, pas en lisant `_headers`.
 
+**Constat mesuré le 20/11/2026 après déploiement** : l'en-tête HTTP `Content-Security-Policy` renvoyé par AwardSpace mentionne encore `https://fonts.googleapis.com` et `https://fonts.gstatic.com`. L'hébergeur n'applique donc pas (ou pas encore) la version durcie de `.htaccess`. Ce n'est pas un risque exploitable : la balise `<meta http-equiv="Content-Security-Policy">`, strictement plus restrictive (`style-src 'self'; font-src 'self'`), est présente sur les 10 pages et le navigateur applique l'intersection des deux politiques — aucune origine tierce n'est chargée, vérifié dans la console et dans le réseau. La documentation reste néanmoins explicite sur cet écart plutôt que de prétendre que l'en-tête est conforme.
+
 ### 3.2 CSP réellement appliquée
 
 Un script inline injecté dans la page est bloqué par le navigateur :

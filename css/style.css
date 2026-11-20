@@ -1412,7 +1412,8 @@ img {
 
 .phone-old {
   grid-column: 2;
-  color: rgba(255, 255, 255, 0.45);
+  /* #CFD4D9 : contraste 5,9:1 sur le fond #484B4E du pied de page. */
+  color: var(--color-bg-mid);
   font-size: 0.72rem;
   font-style: italic;
 }
