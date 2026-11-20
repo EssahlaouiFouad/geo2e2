@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#354580"/>
+  <path d="M0 44h64v6a14 14 0 0 1-14 14H14A14 14 0 0 1 0 50z" fill="#0068B4" opacity=".85"/>
+  <text x="32" y="37" text-anchor="middle" font-family="Manrope, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="-.6" fill="#FFFFFF">GEO2E2</text>
+  <circle cx="32" cy="50" r="2.5" fill="#7FE0C3"/>
+</svg>

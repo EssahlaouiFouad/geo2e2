@@ -1,0 +1,8 @@
+/* GEO2E2 — Affichage de secours lorsque JavaScript est désactivé.
+   Le classe « js » est posée dans le HTML ; sans JS, cette feuille
+   rend visibles les blocs normalement animés à l'apparition. */
+
+.js .reveal {
+  opacity: 1;
+  transform: none;
+}

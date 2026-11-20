@@ -1,0 +1,37 @@
+# GEO2E2 — Configuration Apache (mutualisé / VPS)
+# À conserver à la racine du site. Nécessite mod_headers.
+
+# Pas de listage de répertoires
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self' mailto:; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  # COOP et HSTS n'ont de sens qu'en HTTPS : sur un hébergement HTTP seul,
+  # le navigateur les ignore et journalise une erreur dans la console.
+  <If "%{HTTPS} == 'on'">
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  </If>
+</IfModule>
+
+# Types MIME explicites (évite toute interprétation abusive)
+<IfModule mod_mime.c>
+  AddType text/html .html
+  AddType text/css .css
+  AddType application/javascript .js
+  AddType image/jpeg .jpg .jpeg
+</IfModule>
+
+# Fichiers sensibles : jamais servis
+<Files "_headers">
+  Require all denied
+</Files>
+
+<FilesMatch "(^\.|~$|\.bak$|\.old$|\.orig$|\.log$|\.sql$|\.zip$|\.env$|\.ini$|\.sh$)">
+  Require all denied
+</FilesMatch>
