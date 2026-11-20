@@ -118,9 +118,9 @@ Le dossier de travail est un dépôt Git avec un commit initial et le tag `avant
 
 ### 3.8 Hébergement GitHub Pages
 
-Le site est publié sur `https://essahlaoui.github.io/geo2e2/` depuis la branche `main`. GitHub Pages sert le HTTPS avec un certificat valide, ce qui lève le blocage historique lié au certificat auto-signé de l'hébergement d'origine. Le fichier `.nojekyll` empêche toute transformation Jekyll. Les 40 URL absolues (canonicals, hreflang, x-default) pointent désormais vers cette adresse, et un `sitemap.xml` avec alternates de langue est fourni.
+Le site est publié sur `https://essahlaouifouad.github.io/geo2e2/` depuis la branche `main`. GitHub Pages sert le HTTPS avec un certificat valide, ce qui lève le blocage historique lié au certificat auto-signé de l'hébergement d'origine. Le fichier `.nojekyll` empêche toute transformation Jekyll. Les 40 URL absolues (canonicals, hreflang, x-default) pointent désormais vers cette adresse, et un `sitemap.xml` avec alternates de langue est fourni.
 
-**Attention** : GitHub Pages ne lit le `robots.txt` qu'à la racine du domaine (`https://essahlaoui.github.io/robots.txt`). Celui du dépôt est donc principalement documentaire ; le `sitemap.xml` peut être soumis directement dans Google Search Console.
+**Attention** : GitHub Pages ne lit le `robots.txt` qu'à la racine du domaine (`https://essahlaouifouad.github.io/robots.txt`). Celui du dépôt est donc principalement documentaire ; le `sitemap.xml` peut être soumis directement dans Google Search Console.
 
 ---
 
@@ -158,9 +158,9 @@ Le site est publié sur `https://essahlaoui.github.io/geo2e2/` depuis la branche
 ## 6. Checklist de mise en production
 
 - [x] Déployer les fichiers modifiés sans transférer `.git`, `.gitignore` ni `build.sh`.
-- [x] Passer en **HTTPS** via GitHub Pages (`https://essahlaoui.github.io/geo2e2/`) : certificat valide, canonicals, hreflang et sitemap mis à jour en conséquence.
+- [x] Passer en **HTTPS** via GitHub Pages (`https://essahlaouifouad.github.io/geo2e2/`) : certificat valide, canonicals, hreflang et sitemap mis à jour en conséquence.
 - [ ] Si le site reste aussi servi depuis l'hébergement d'origine, y appliquer une redirection 301 vers GitHub Pages pour éviter le contenu dupliqué.
-- [ ] Vérifier les en-têtes réels : `curl -sSI https://essahlaoui.github.io/geo2e2/ | grep -Ei 'content-security|x-frame|referrer|permissions'`.
+- [ ] Vérifier les en-têtes réels : `curl -sSI https://essahlaouifouad.github.io/geo2e2/ | grep -Ei 'content-security|x-frame|referrer|permissions'`.
 - [x] Vérifier que le listage de répertoires est désactivé (`/img/` → 403).
 - [x] Vérifier l'absence de fichiers sensibles dans le dossier publié.
 - [x] Tester le site avec JavaScript désactivé (contenu visible via `noscript.css`).
@@ -192,7 +192,7 @@ grep -Rn 'http://' *.html css/*.css js/*.js
 grep -RnE 'innerHTML|outerHTML|eval\(|document\.write' js/*.js
 
 # En-têtes de production
-curl -sSI https://essahlaoui.github.io/geo2e2/ | grep -Ei 'content-security|x-content|x-frame|referrer|permissions'
+curl -sSI https://essahlaouifouad.github.io/geo2e2/ | grep -Ei 'content-security|x-content|x-frame|referrer|permissions'
 ```
 
 ---

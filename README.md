@@ -2,7 +2,7 @@
 
 Site vitrine statique pour GEO2E2 (bureau d'études en géosciences, mines, eau et environnement).
 
-**Adresse GitHub Pages :** <https://essahlaoui.github.io/geo2e2/>
+**Adresse GitHub Pages :** <https://essahlaouifouad.github.io/geo2e2/>
 
 ## Structure
 

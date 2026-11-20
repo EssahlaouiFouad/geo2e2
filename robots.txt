@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://essahlaoui.github.io/geo2e2/sitemap.xml
+Sitemap: https://essahlaouifouad.github.io/geo2e2/sitemap.xml
