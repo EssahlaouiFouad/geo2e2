@@ -38,6 +38,12 @@ build.sh                    Versionnage de cache — une seule source de vérit�
 git add -A && git commit -m "..." && git push
 ```
 
+Le dépôt `EssahlaouiFouad/geo2e2` utilise une **clé de déploiement dédiée** (le compte SSH principal appartient à un autre compte GitHub). Elle est configurée localement via `core.sshCommand`. Sur une autre machine :
+
+```bash
+git config core.sshCommand "ssh -i ~/.ssh/geo2e2_deploy_ed25519 -o IdentitiesOnly=yes"
+```
+
 GitHub Pages publie automatiquement la branche `main` à la racine du dépôt.
 Le fichier `.nojekyll` garantit que les fichiers et dossiers commençant par `_` ou `.` sont servis tels quels.
 
