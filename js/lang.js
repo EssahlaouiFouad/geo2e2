@@ -1,8 +1,11 @@
 /* ==========================================================================
    GEO2E2 — Choix de langue et détection de la langue du système
-   - Mémorise le choix explicite de l'utilisateur (localStorage)
+   - Mémorise uniquement le choix explicite (clic sur FR / EN) dans localStorage
    - Redirige vers l'anglais si le navigateur/système est en anglais
-   - ?lang=fr ou ?lang=en force la langue
+   - ?lang=fr ou ?lang=en force la requête en cours SANS écrire de préférence :
+     le paramètre est propagé lors de la redirection pour éviter un rebond,
+     mais il ne devient jamais un choix mémorisé. Un lien partagé ne change
+     donc pas la langue future du visiteur.
    ========================================================================== */
 
 (function () {
@@ -20,13 +23,14 @@
   }
 
   if (forced === "fr" || forced === "en") {
+    // Force l'affichage de cette requête uniquement. Aucune écriture ici :
+    // seul un clic explicite sur le sélecteur FR/EN persiste dans localStorage.
     stored = forced;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, forced);
-    } catch (error) {
-      /* stockage indisponible : la détection reste fonctionnelle */
-    }
   }
+
+  // Le paramètre suit la redirection, sinon la page d'arrivée reprendrait la
+  // langue du système et renverrait immédiatement vers la page d'origine.
+  var forcedQuery = forced === "fr" || forced === "en" ? "?lang=" + forced : "";
 
   var path = window.location.pathname;
   var inEnglish = /\/en(\/|$)/.test(path);
@@ -71,13 +75,13 @@
     if (stored === "en" || (!stored && prefersEnglish)) {
       var englishTarget = englishFiles[file];
       if (englishTarget) {
-        goTo(base + "/en/" + englishTarget + window.location.hash);
+        goTo(base + "/en/" + englishTarget + forcedQuery + window.location.hash);
       }
     }
   } else if (stored === "fr") {
     var frenchTarget = frenchFiles[file];
     if (frenchTarget) {
-      goTo(base + "/" + frenchTarget + window.location.hash);
+      goTo(base + "/" + frenchTarget + forcedQuery + window.location.hash);
     }
   }
 

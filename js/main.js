@@ -137,6 +137,9 @@
     const statusMessage =
       contactForm.getAttribute("data-status-message") ||
       "Votre messagerie s'ouvre avec le message prérempli. Vous pouvez aussi nous écrire directement à geoexplorer.e2@gmail.com.";
+    const fallbackMessage =
+      contactForm.getAttribute("data-status-fallback") ||
+      "Si votre messagerie ne s'ouvre pas, écrivez-nous directement à geoexplorer.e2@gmail.com.";
     const subjectPrefix =
       contactForm.getAttribute("data-mail-subject") || "Site GEO2E2 — ";
     const defaultSubject =
@@ -188,6 +191,14 @@
       }
 
       window.location.href = mailto;
+
+      // Si aucune messagerie ne s'ouvre, la page garde le focus : on le dit
+      // explicitement au visiteur au lieu de le laisser dans le doute.
+      window.setTimeout(function () {
+        if (!document.hasFocus() || !status) return;
+        status.textContent = fallbackMessage;
+        status.classList.add("is-visible");
+      }, 1200);
     });
   }
 

@@ -227,6 +227,14 @@ img {
   color: var(--white);
 }
 
+.btn-disabled {
+  border: 1px dashed rgba(53, 69, 128, 0.35);
+  color: rgba(53, 69, 128, 0.55);
+  background: transparent;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
 .btn .arrow {
   font-size: 1.05rem;
   line-height: 1;
@@ -580,7 +588,8 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 68% center;
+  /* Recadrage vérifié sans texte : plus besoin de décalage pour masquer un glyphe. */
+  object-position: center;
   transform: scale(1.02);
   animation: heroZoom 18s var(--ease) both;
 }
@@ -1399,6 +1408,13 @@ img {
 
 .footer-contact a {
   color: rgba(255, 255, 255, 0.72);
+}
+
+.phone-old {
+  grid-column: 2;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.72rem;
+  font-style: italic;
 }
 
 .footer-bottom {

@@ -5,7 +5,7 @@
 Options -Indexes
 
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self' mailto:; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'"
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self' mailto:; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'"
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
@@ -25,6 +25,8 @@ Options -Indexes
   AddType text/css .css
   AddType application/javascript .js
   AddType image/jpeg .jpg .jpeg
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
 </IfModule>
 
 # Fichiers sensibles : jamais servis
