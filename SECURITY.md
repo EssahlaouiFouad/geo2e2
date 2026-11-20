@@ -116,6 +116,12 @@ GET /img/  →  HTTP 403
 
 Le dossier de travail est un dépôt Git avec un commit initial et le tag `avant-remédiation`. **Le dossier `.git` ne doit jamais être transféré vers l'hébergement** ; `.htaccess` le refuse déjà, mais l'exclusion est aussi appliquée lors du déploiement.
 
+### 3.8 Hébergement GitHub Pages
+
+Le site est publié sur `https://essahlaoui.github.io/geo2e2/` depuis la branche `main`. GitHub Pages sert le HTTPS avec un certificat valide, ce qui lève le blocage historique lié au certificat auto-signé de l'hébergement d'origine. Le fichier `.nojekyll` empêche toute transformation Jekyll. Les 40 URL absolues (canonicals, hreflang, x-default) pointent désormais vers cette adresse, et un `sitemap.xml` avec alternates de langue est fourni.
+
+**Attention** : GitHub Pages ne lit le `robots.txt` qu'à la racine du domaine (`https://essahlaoui.github.io/robots.txt`). Celui du dépôt est donc principalement documentaire ; le `sitemap.xml` peut être soumis directement dans Google Search Console.
+
 ---
 
 ## 4. Correctifs appliqués
@@ -138,7 +144,7 @@ Le dossier de travail est un dépôt Git avec un commit initial et le tag `avant
 
 | Priorité | Recommandation |
 |----------|----------------|
-| Haute (déploiement) | Servir le site **exclusivement en HTTPS** avec redirection 301 depuis HTTP et certificat valide. **Ne pas écrire d'URL `https://` dans les canonicals/hreflang/JSON-LD avant que le service soit réel** : le faire maintenant casserait l'indexation. |
+| Haute (déploiement) | **Résolu sur GitHub Pages** (HTTPS valide). Reste à faire sur l'hébergement d'origine s'il est conservé : redirection 301 vers GitHub Pages. Ne jamais écrire d'URL `https://` pour un service qui ne le fournit pas réellement. |
 | Moyenne | Remplacer `mailto:` par un **backend de formulaire** (Formspree, Netlify Forms…) avec limitation de débit, honeypot et politique de confidentialité, dès validation par le client. |
 | Faible | Réduire la collecte d'emails par les robots spammeurs (obfuscation légère), sans dégrader l'accessibilité. |
 | Faible | Activer un **endpoint de reporting CSP** (`report-to`) pour détecter toute régression. |
@@ -152,8 +158,9 @@ Le dossier de travail est un dépôt Git avec un commit initial et le tag `avant
 ## 6. Checklist de mise en production
 
 - [x] Déployer les fichiers modifiés sans transférer `.git`, `.gitignore` ni `build.sh`.
-- [ ] Passer en **HTTPS** (certificat valide, redirection 301 depuis HTTP), puis mettre à jour canonicals, hreflang, `og:url` et JSON-LD.
-- [ ] Vérifier les en-têtes réels : `curl -sSI http://geo2e2.atwebpages.com/ | grep -Ei 'content-security|x-frame|referrer|permissions'`.
+- [x] Passer en **HTTPS** via GitHub Pages (`https://essahlaoui.github.io/geo2e2/`) : certificat valide, canonicals, hreflang et sitemap mis à jour en conséquence.
+- [ ] Si le site reste aussi servi depuis l'hébergement d'origine, y appliquer une redirection 301 vers GitHub Pages pour éviter le contenu dupliqué.
+- [ ] Vérifier les en-têtes réels : `curl -sSI https://essahlaoui.github.io/geo2e2/ | grep -Ei 'content-security|x-frame|referrer|permissions'`.
 - [x] Vérifier que le listage de répertoires est désactivé (`/img/` → 403).
 - [x] Vérifier l'absence de fichiers sensibles dans le dossier publié.
 - [x] Tester le site avec JavaScript désactivé (contenu visible via `noscript.css`).
@@ -185,7 +192,7 @@ grep -Rn 'http://' *.html css/*.css js/*.js
 grep -RnE 'innerHTML|outerHTML|eval\(|document\.write' js/*.js
 
 # En-têtes de production
-curl -sSI http://geo2e2.atwebpages.com/ | grep -Ei 'content-security|x-content|x-frame|referrer|permissions'
+curl -sSI https://essahlaoui.github.io/geo2e2/ | grep -Ei 'content-security|x-content|x-frame|referrer|permissions'
 ```
 
 ---
